@@ -50,8 +50,7 @@
   "scripts": {
     "download-specs": "node scripts/download-specs.js",
     "generate": "node scripts/generate-types.js",
-    "copy-types": "mkdir -p dist && cp generated/*.ts dist/ && for f in dist/*.ts; do [ $(basename \"$f\") != \"index.ts\" ] && mv \"$f\" \"${f%.ts}.d.ts\" || rm \"$f\"; done",
-    "build": "pnpm run download-specs && pnpm run generate && pnpm run copy-types && pnpm tsc",
+    "build": "pnpm run clean && pnpm run download-specs && pnpm run generate && pnpm tsc",
     "prepublishOnly": "pnpm run build",
     "publish": "dotenv -- npm publish",
     "clean": "rm -rf dist specs generated"
