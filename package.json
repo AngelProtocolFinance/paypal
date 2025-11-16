@@ -1,47 +1,47 @@
 {
   "name": "@better-giving/paypal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
   "type": "module",
   "exports": {
     "./catalog-products": {
-      "types": "./dist/catalog-products.d.ts"
+      "types": "./dist/generated/catalog-products.d.ts"
     },
     "./disputes": {
-      "types": "./dist/disputes.d.ts"
+      "types": "./dist/generated/disputes.d.ts"
     },
     "./invoices": {
-      "types": "./dist/invoices.d.ts"
+      "types": "./dist/generated/invoices.d.ts"
     },
     "./orders": {
-      "types": "./dist/orders.d.ts"
+      "types": "./dist/generated/orders.d.ts"
     },
     "./partner-referrals": {
-      "types": "./dist/partner-referrals.d.ts"
+      "types": "./dist/generated/partner-referrals.d.ts"
     },
     "./payment-tokens": {
-      "types": "./dist/payment-tokens.d.ts"
+      "types": "./dist/generated/payment-tokens.d.ts"
     },
     "./payments": {
-      "types": "./dist/payments.d.ts"
+      "types": "./dist/generated/payments.d.ts"
     },
     "./payouts": {
-      "types": "./dist/payouts.d.ts"
+      "types": "./dist/generated/payouts.d.ts"
     },
     "./shipment-tracking": {
-      "types": "./dist/shipment-tracking.d.ts"
+      "types": "./dist/generated/shipment-tracking.d.ts"
     },
     "./subscriptions": {
-      "types": "./dist/subscriptions.d.ts"
+      "types": "./dist/generated/subscriptions.d.ts"
     },
     "./transaction-search": {
-      "types": "./dist/transaction-search.d.ts"
+      "types": "./dist/generated/transaction-search.d.ts"
     },
     "./web-experience-profiles": {
-      "types": "./dist/web-experience-profiles.d.ts"
+      "types": "./dist/generated/web-experience-profiles.d.ts"
     },
     "./webhooks": {
-      "types": "./dist/webhooks.d.ts"
+      "types": "./dist/generated/webhooks.d.ts"
     },
     "./helpers": {
       "types": "./dist/helpers/index.d.ts"
