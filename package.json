@@ -1,6 +1,6 @@
 {
   "name": "@better-giving/paypal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
   "type": "module",
   "exports": {
@@ -51,8 +51,7 @@
     "download-specs": "node scripts/download-specs.js",
     "generate": "node scripts/generate-types.js",
     "build": "pnpm run clean && pnpm run download-specs && pnpm run generate && pnpm tsc",
-    "prepublishOnly": "pnpm run build",
-    "publish": "dotenv -- npm publish",
+    "release": "pnpm run build && dotenv -- npm publish",
     "clean": "rm -rf dist specs generated"
   },
   "keywords": [
