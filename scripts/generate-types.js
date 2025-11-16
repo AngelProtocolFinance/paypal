@@ -41,7 +41,8 @@ async function generateTypes(specFile) {
 
   try {
     // Use the CLI to generate types
-    const command = `npx openapi-typescript "${inputPath}" -o "${outputPath}" --export-type --path-params-as-types`;
+    // Note: Removed --path-params-as-types to avoid TypeScript index signature conflicts
+    const command = `npx openapi-typescript "${inputPath}" -o "${outputPath}" --export-type`;
 
     await execAsync(command);
 
