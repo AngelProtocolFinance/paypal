@@ -1,6 +1,6 @@
 {
   "name": "@better-giving/paypal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
   "type": "module",
   "exports": {
@@ -53,6 +53,7 @@
     "copy-types": "mkdir -p dist && cp generated/*.ts dist/ && for f in dist/*.ts; do [ $(basename \"$f\") != \"index.ts\" ] && mv \"$f\" \"${f%.ts}.d.ts\" || rm \"$f\"; done",
     "build": "pnpm run download-specs && pnpm run generate && pnpm run copy-types && pnpm tsc",
     "prepublishOnly": "pnpm run build",
+    "publish": "dotenv -- npm publish",
     "clean": "rm -rf dist specs generated"
   },
   "keywords": [
@@ -66,6 +67,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.10.1",
+    "dotenv-cli": "^11.0.0",
     "openapi-typescript": "^7.4.4",
     "typescript": "^5.7.2"
   },
