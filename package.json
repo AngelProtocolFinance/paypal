@@ -1,86 +1,86 @@
 {
-  "name": "@better-giving/paypal",
-  "version": "1.0.4",
-  "description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
-  "type": "module",
-  "exports": {
-    "./catalog-products": {
-      "types": "./dist/generated/catalog-products.d.ts"
-    },
-    "./disputes": {
-      "types": "./dist/generated/disputes.d.ts"
-    },
-    "./invoices": {
-      "types": "./dist/generated/invoices.d.ts"
-    },
-    "./orders": {
-      "types": "./dist/generated/orders.d.ts"
-    },
-    "./partner-referrals": {
-      "types": "./dist/generated/partner-referrals.d.ts"
-    },
-    "./payment-tokens": {
-      "types": "./dist/generated/payment-tokens.d.ts"
-    },
-    "./payments": {
-      "types": "./dist/generated/payments.d.ts"
-    },
-    "./payouts": {
-      "types": "./dist/generated/payouts.d.ts"
-    },
-    "./shipment-tracking": {
-      "types": "./dist/generated/shipment-tracking.d.ts"
-    },
-    "./subscriptions": {
-      "types": "./dist/generated/subscriptions.d.ts"
-    },
-    "./transaction-search": {
-      "types": "./dist/generated/transaction-search.d.ts"
-    },
-    "./web-experience-profiles": {
-      "types": "./dist/generated/web-experience-profiles.d.ts"
-    },
-    "./webhooks": {
-      "types": "./dist/generated/webhooks.d.ts"
-    },
-    "./helpers": {
-      "types": "./dist/helpers/index.d.ts"
-    }
-  },
-  "scripts": {
-    "download-specs": "node scripts/download-specs.js",
-    "generate": "node scripts/generate-types.js",
-    "build": "pnpm run clean && pnpm run download-specs && pnpm run generate && pnpm tsc",
-    "release": "pnpm run build && dotenv -- npm publish",
-    "clean": "rm -rf dist specs generated"
-  },
-  "keywords": [
-    "paypal",
-    "typescript",
-    "types",
-    "openapi",
-    "rest-api"
-  ],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^24.10.1",
-    "dotenv-cli": "^11.0.0",
-    "openapi-typescript": "^7.4.4",
-    "typescript": "^5.7.2"
-  },
-  "files": [
-    "dist",
-    "helpers",
-    "README.md",
-    "LICENSE"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yourusername/paypal-typescript-types.git"
-  },
-  "packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "@better-giving/paypal",
+	"version": "1.0.5",
+	"description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
+	"type": "module",
+	"exports": {
+		"./catalog-products": {
+			"types": "./dist/generated/catalog-products.d.ts"
+		},
+		"./disputes": {
+			"types": "./dist/generated/disputes.d.ts"
+		},
+		"./invoices": {
+			"types": "./dist/generated/invoices.d.ts"
+		},
+		"./orders": {
+			"types": "./dist/generated/orders.d.ts"
+		},
+		"./partner-referrals": {
+			"types": "./dist/generated/partner-referrals.d.ts"
+		},
+		"./payment-tokens": {
+			"types": "./dist/generated/payment-tokens.d.ts"
+		},
+		"./payments": {
+			"types": "./dist/generated/payments.d.ts"
+		},
+		"./payouts": {
+			"types": "./dist/generated/payouts.d.ts"
+		},
+		"./shipment-tracking": {
+			"types": "./dist/generated/shipment-tracking.d.ts"
+		},
+		"./subscriptions": {
+			"types": "./dist/generated/subscriptions.d.ts"
+		},
+		"./transaction-search": {
+			"types": "./dist/generated/transaction-search.d.ts"
+		},
+		"./web-experience-profiles": {
+			"types": "./dist/generated/web-experience-profiles.d.ts"
+		},
+		"./webhooks": {
+			"types": "./dist/generated/webhooks.d.ts"
+		},
+		"./helpers": {
+			"types": "./dist/helpers/index.d.ts"
+		}
+	},
+	"scripts": {
+		"download-specs": "node scripts/download-specs.js",
+		"generate": "node scripts/generate-types.js",
+		"build": "pnpm run clean && pnpm run download-specs && pnpm run generate && pnpm tsc",
+		"release": "pnpm run build && dotenv -- npm publish",
+		"clean": "rm -rf dist specs generated"
+	},
+	"keywords": [
+		"paypal",
+		"typescript",
+		"types",
+		"openapi",
+		"rest-api"
+	],
+	"author": "",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"dotenv-cli": "^11.0.0",
+		"openapi-typescript": "^7.4.4",
+		"typescript": "^5.7.2"
+	},
+	"files": [
+		"dist",
+		"helpers",
+		"README.md",
+		"LICENSE"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yourusername/paypal-typescript-types.git"
+	},
+	"packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c",
+	"publishConfig": {
+		"access": "public"
+	}
 }
