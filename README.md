@@ -15,65 +15,88 @@ TypeScript type definitions automatically generated from [PayPal's official Open
 pnpm install @better-giving/paypal
 ```
 
-## Available APIs
+## Available Modules
 
 This package provides TypeScript types for the following PayPal APIs:
 
-- **Orders** - Checkout Orders API v2
-- **Payments** - Payments API v2
-- **Subscriptions** - Billing Subscriptions API v1
-- **Invoices** - Invoicing API v2
-- **Payouts** - Payouts Batch API v1
-- **Payment Tokens** - Vault Payment Tokens API v3
-- **Disputes** - Customer Disputes API v1
-- **Partner Referrals** - Partner Referrals API v2
-- **Catalog Products** - Catalog Products API v1
-- **Shipment Tracking** - Shipment Tracking API v1
-- **Web Experience Profiles** - Payment Experience API v1
-- **Transaction Search** - Transaction Search API v1
-- **Webhooks** - Webhooks Management API v1
+| Module | Import Path | API |
+|--------|-------------|-----|
+| **Orders** | `@better-giving/paypal/orders` | Checkout Orders API v2 |
+| **Payments** | `@better-giving/paypal/payments` | Payments API v2 |
+| **Subscriptions** | `@better-giving/paypal/subscriptions` | Billing Subscriptions API v1 |
+| **Invoices** | `@better-giving/paypal/invoices` | Invoicing API v2 |
+| **Payouts** | `@better-giving/paypal/payouts` | Payouts Batch API v1 |
+| **Payment Tokens** | `@better-giving/paypal/payment-tokens` | Vault Payment Tokens API v3 |
+| **Disputes** | `@better-giving/paypal/disputes` | Customer Disputes API v1 |
+| **Partner Referrals** | `@better-giving/paypal/partner-referrals` | Partner Referrals API v2 |
+| **Catalog Products** | `@better-giving/paypal/catalog-products` | Catalog Products API v1 |
+| **Shipment Tracking** | `@better-giving/paypal/shipment-tracking` | Shipment Tracking API v1 |
+| **Web Experience Profiles** | `@better-giving/paypal/web-experience-profiles` | Payment Experience API v1 |
+| **Transaction Search** | `@better-giving/paypal/transaction-search` | Transaction Search API v1 |
+| **Webhooks** | `@better-giving/paypal/webhooks` | Webhooks Management API v1 |
+| **Helpers** | `@better-giving/paypal/helpers` | SDK utilities |
 
 ## Usage
 
+Import types directly from specific API modules:
+
 ```typescript
-import {
-  orders,
-  payments,
-  subscriptions,
-  invoices
-} from '@better-giving/paypal';
+// Import from specific modules
+import type { paths as OrdersPaths } from '@better-giving/paypal/orders';
+import type { paths as PaymentsPaths } from '@better-giving/paypal/payments';
+import type { paths as SubscriptionsPaths } from '@better-giving/paypal/subscriptions';
 
 // Use the generated types
-type Order = orders.components['schemas']['order'];
-type Payment = payments.components['schemas']['payment'];
-type Subscription = subscriptions.components['schemas']['subscription'];
+type Order = OrdersPaths['/v2/checkout/orders']['post']['responses']['201']['content']['application/json'];
+type CreateOrderRequest = OrdersPaths['/v2/checkout/orders']['post']['requestBody']['content']['application/json'];
+type CreateOrderResponse = OrdersPaths['/v2/checkout/orders']['post']['responses']['201']['content']['application/json'];
+```
 
-// Path types
-type CreateOrderPath = orders.paths['/v2/checkout/orders']['post'];
+## Using the PayPal SDK Helper
 
-// Response types
-type CreateOrderResponse = orders.paths['/v2/checkout/orders']['post']['responses']['201']['content']['application/json'];
+This package includes a simple SDK helper for making API calls:
 
-// Request body types
-type CreateOrderRequest = orders.paths['/v2/checkout/orders']['post']['requestBody']['content']['application/json'];
+```typescript
+import { PayPalSDK, type PayPalConfig } from '@better-giving/paypal/helpers';
+
+const sdk = new PayPalSDK({
+  client_id: 'your-client-id',
+  client_secret: 'your-client-secret',
+  api_url: 'https://api-m.sandbox.paypal.com', // or https://api-m.paypal.com for production
+});
+
+// Create an order
+const order = await sdk.create_order({
+  intent: 'CAPTURE',
+  purchase_units: [
+    {
+      amount: {
+        currency_code: 'USD',
+        value: '100.00',
+      },
+    },
+  ],
+});
+
+console.log('Order ID:', order.id);
 ```
 
 ## Example with Fetch
 
 ```typescript
-import { orders } from '@better-giving/paypal';
+import type { paths } from '@better-giving/paypal/orders';
 
-type CreateOrderRequest = orders.paths['/v2/checkout/orders']['post']['requestBody']['content']['application/json'];
-type CreateOrderResponse = orders.paths['/v2/checkout/orders']['post']['responses']['201']['content']['application/json'];
+type CreateOrderRequest = paths['/v2/checkout/orders']['post']['requestBody']['content']['application/json'];
+type CreateOrderResponse = paths['/v2/checkout/orders']['post']['responses']['201']['content']['application/json'];
 
-async function createOrder(orderData: CreateOrderRequest): Promise<CreateOrderResponse> {
+async function create_order(order_data: CreateOrderRequest): Promise<CreateOrderResponse> {
   const response = await fetch('https://api.paypal.com/v2/checkout/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      'Authorization': `Bearer ${access_token}`
     },
-    body: JSON.stringify(orderData)
+    body: JSON.stringify(order_data)
   });
 
   if (!response.ok) {

@@ -2,14 +2,56 @@
   "name": "@better-giving/paypal",
   "version": "1.0.1",
   "description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "type": "module",
+  "exports": {
+    "./catalog-products": {
+      "types": "./dist/catalog-products.d.ts"
+    },
+    "./disputes": {
+      "types": "./dist/disputes.d.ts"
+    },
+    "./invoices": {
+      "types": "./dist/invoices.d.ts"
+    },
+    "./orders": {
+      "types": "./dist/orders.d.ts"
+    },
+    "./partner-referrals": {
+      "types": "./dist/partner-referrals.d.ts"
+    },
+    "./payment-tokens": {
+      "types": "./dist/payment-tokens.d.ts"
+    },
+    "./payments": {
+      "types": "./dist/payments.d.ts"
+    },
+    "./payouts": {
+      "types": "./dist/payouts.d.ts"
+    },
+    "./shipment-tracking": {
+      "types": "./dist/shipment-tracking.d.ts"
+    },
+    "./subscriptions": {
+      "types": "./dist/subscriptions.d.ts"
+    },
+    "./transaction-search": {
+      "types": "./dist/transaction-search.d.ts"
+    },
+    "./web-experience-profiles": {
+      "types": "./dist/web-experience-profiles.d.ts"
+    },
+    "./webhooks": {
+      "types": "./dist/webhooks.d.ts"
+    },
+    "./helpers": {
+      "types": "./dist/helpers/index.d.ts"
+    }
+  },
   "scripts": {
     "download-specs": "node scripts/download-specs.js",
     "generate": "node scripts/generate-types.js",
-    "copy-types": "mkdir -p dist && cp generated/*.ts dist/ && for f in dist/*.ts; do mv \"$f\" \"${f%.ts}.d.ts\"; done && cp generated/index.ts dist/index.d.ts",
-    "build": "pnpm run download-specs && pnpm run generate && pnpm run copy-types",
+    "copy-types": "mkdir -p dist && cp generated/*.ts dist/ && for f in dist/*.ts; do [ $(basename \"$f\") != \"index.ts\" ] && mv \"$f\" \"${f%.ts}.d.ts\" || rm \"$f\"; done",
+    "build": "pnpm run download-specs && pnpm run generate && pnpm run copy-types && pnpm tsc",
     "prepublishOnly": "pnpm run build",
     "clean": "rm -rf dist specs generated"
   },
@@ -29,6 +71,7 @@
   },
   "files": [
     "dist",
+    "helpers",
     "README.md",
     "LICENSE"
   ],
