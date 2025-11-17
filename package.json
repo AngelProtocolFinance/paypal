@@ -1,6 +1,6 @@
 {
 	"name": "@better-giving/paypal",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
 	"type": "module",
 	"exports": {
