@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
@@ -15,20 +15,20 @@ const BASE_URL =
 const SPEC_FILES = [
 	"checkout_orders_v2.json",
 	"payments_payment_v2.json",
-	"billing_subscriptions_v1.json",
-	"invoicing_v2.json",
-	"payments_payouts_batch_v1.json",
-	"vault_payment_tokens_v3.json",
-	"customer_disputes_v1.json",
-	"customer_partner_referrals_v2.json",
-	"catalogs_products_v1.json",
-	"shipping_shipment_tracking_v1.json",
-	"payment-experience_web_experience_profiles_v1.json",
-	"reporting_transactions_v1.json",
+	// "billing_subscriptions_v1.json",
+	// "invoicing_v2.json",
+	// "payments_payouts_batch_v1.json",
+	// "vault_payment_tokens_v3.json",
+	// "customer_disputes_v1.json",
+	// "customer_partner_referrals_v2.json",
+	// "catalogs_products_v1.json",
+	// "shipping_shipment_tracking_v1.json",
+	// "payment-experience_web_experience_profiles_v1.json",
+	// "reporting_transactions_v1.json",
 	"notifications_webhooks_v1.json",
 ];
 
-async function downloadSpec(filename) {
+async function downloadSpec(filename: string): Promise<boolean> {
 	const url = `${BASE_URL}/${filename}`;
 	console.log(`Downloading ${filename}...`);
 
@@ -43,12 +43,15 @@ async function downloadSpec(filename) {
 		console.log(`✓ Downloaded ${filename}`);
 		return true;
 	} catch (error) {
-		console.error(`✗ Failed to download ${filename}:`, error.message);
+		console.error(
+			`✗ Failed to download ${filename}:`,
+			error instanceof Error ? error.message : String(error),
+		);
 		return false;
 	}
 }
 
-async function main() {
+async function main(): Promise<void> {
 	console.log("Creating specs directory...");
 	await mkdir(SPECS_DIR, { recursive: true });
 

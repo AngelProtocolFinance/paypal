@@ -9,16 +9,14 @@
 			"import": "./dist/src/index.js"
 		},
 		"./generated": {
-			"types": "./dist/generated/index.d.ts",
-			"import": "./dist/generated/index.js"
+			"types": "./dist/src/generated/index.d.ts",
+			"import": "./dist/src/generated/index.js"
 		}
 	},
 	"scripts": {
-		"download-specs": "bun scripts/download-specs.js",
-		"generate": "bun scripts/generate-types.js",
-		"build": "bun run clean && bun run download-specs && bun run generate && bunx bunup",
+		"build": "bun run clean && bun scripts/download-specs.ts && bun scripts/generate-types.ts && bunx bunup",
 		"release": "bun run build && dotenv -- npm publish",
-		"clean": "rm -rf dist specs generated",
+		"clean": "rm -rf dist specs src/generated",
 		"format": "biome check --write --unsafe"
 	},
 	"keywords": [

@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 
 import { exec } from "node:child_process";
 import { mkdir, readdir, writeFile } from "node:fs/promises";
@@ -12,10 +12,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const SPECS_DIR = join(__dirname, "..", "specs");
-const GENERATED_DIR = join(__dirname, "..", "generated");
+const GENERATED_DIR = join(__dirname, "..", "src", "generated");
 
 // Map of spec files to more friendly module names
-const MODULE_NAMES = {
+const MODULE_NAMES: Record<string, string> = {
 	"checkout_orders_v2.json": "orders",
 	"payments_payment_v2.json": "payments",
 	"billing_subscriptions_v1.json": "subscriptions",
@@ -32,7 +32,12 @@ const MODULE_NAMES = {
 	"notifications_webhooks_v1.json": "webhooks",
 };
 
-async function generateTypes(specFile) {
+interface GenerateResult {
+	moduleName: string;
+	success: boolean;
+}
+
+async function generateTypes(specFile: string): Promise<GenerateResult> {
 	const moduleName = MODULE_NAMES[specFile] || specFile.replace(".json", "");
 	const inputPath = join(SPECS_DIR, specFile);
 	const outputPath = join(GENERATED_DIR, `${moduleName}.ts`);
@@ -51,13 +56,13 @@ async function generateTypes(specFile) {
 	} catch (error) {
 		console.error(
 			`✗ Failed to generate types for ${moduleName}:`,
-			error.message,
+			error instanceof Error ? error.message : String(error),
 		);
 		return { moduleName, success: false };
 	}
 }
 
-async function createIndexFile(modules) {
+async function createIndexFile(modules: string[]): Promise<void> {
 	const exports = modules
 		.map(
 			(moduleName) =>
@@ -79,7 +84,7 @@ ${exports}
 	console.log("✓ Generated index.ts");
 }
 
-async function main() {
+async function main(): Promise<void> {
 	console.log("Creating generated directory...");
 	await mkdir(GENERATED_DIR, { recursive: true });
 

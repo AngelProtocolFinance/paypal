@@ -85,6 +85,6 @@ export class PayPalSDK {
 			throw new Error(`Failed to create order: ${response.status} ${error}`);
 		}
 
-		return await response.json();
+		return (await response.json()) as CreateOrderResponse;
 	}
 }

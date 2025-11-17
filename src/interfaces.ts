@@ -1,6 +1,6 @@
-import type * as orders from "../generated/orders";
-import type * as payments from "../generated/payments";
-import type * as webhooks from "../generated/webhooks";
+import type * as orders from "./generated/orders";
+import type * as payments from "./generated/payments";
+import type * as webhooks from "./generated/webhooks";
 
 /**
  * API Paths - using path definitions from generated types
