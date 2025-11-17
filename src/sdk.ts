@@ -1,52 +1,18 @@
-import type { paths } from "../generated/orders";
+import {
+	type CreateOrderRequest,
+	type CreateOrderResponse,
+	create_order_path,
+	type IAccessTokenRes,
+	type ISdkConfig,
+	oauth_token_path,
+} from "./interfaces";
 
-/**
- * PayPal SDK Configuration
- */
-export interface PayPalConfig {
-	client_id: string;
-	client_secret: string;
-	api_url: string;
-}
-
-/**
- * PayPal Access Token Response
- */
-interface AccessTokenResponse {
-	access_token: string;
-	token_type: string;
-	expires_in: number;
-}
-
-/**
- * API Paths - using path definitions from generated types
- */
-const PATHS = {
-	OAUTH_TOKEN: "/v1/oauth2/token" as const,
-	CREATE_ORDER: "/v2/checkout/orders" as const satisfies keyof paths,
-} as const;
-
-/**
- * Type for create order request body
- */
-type CreateOrderRequest =
-	paths[typeof PATHS.CREATE_ORDER]["post"]["requestBody"]["content"]["application/json"];
-
-/**
- * Type for create order response
- */
-type CreateOrderResponse =
-	paths[typeof PATHS.CREATE_ORDER]["post"]["responses"]["201"]["content"]["application/json"];
-
-/**
- * Simple PayPal SDK using fetch
- */
 export class PayPalSDK {
-	private config: PayPalConfig;
+	private config: ISdkConfig;
 	private access_token?: string;
 	private token_expiry?: number;
 
-	constructor(config: PayPalConfig) {
+	constructor(config: ISdkConfig) {
 		this.config = config;
 	}
 
@@ -68,7 +34,7 @@ export class PayPalSDK {
 		).toString("base64");
 
 		const response = await globalThis.fetch(
-			`${this.config.api_url}${PATHS.OAUTH_TOKEN}`,
+			`${this.config.api_url}${oauth_token_path}`,
 			{
 				method: "POST",
 				headers: {
@@ -86,7 +52,7 @@ export class PayPalSDK {
 			);
 		}
 
-		const data = (await response.json()) as AccessTokenResponse;
+		const data = (await response.json()) as IAccessTokenRes;
 		this.access_token = data.access_token;
 		// Set expiry with 60 second buffer
 		this.token_expiry = Date.now() + (data.expires_in - 60) * 1000;
@@ -103,7 +69,7 @@ export class PayPalSDK {
 		const token = await this.get_access_token();
 
 		const response = await globalThis.fetch(
-			`${this.config.api_url}${PATHS.CREATE_ORDER}`,
+			`${this.config.api_url}${create_order_path}`,
 			{
 				method: "POST",
 				headers: {
