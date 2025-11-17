@@ -16,6 +16,6 @@
 		"emitDeclarationOnly": true,
 		"types": ["node"]
 	},
-	"include": ["generated/**/*", "sdk/**/*"],
+	"include": ["generated/**/*", "sdk/**/*", "helpers/**/*"],
 	"exclude": ["node_modules", "dist", "scripts"]
 }
