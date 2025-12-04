@@ -1,8 +1,8 @@
-import type * as products from "./generated/catalog-products";
-import type * as orders from "./generated/orders";
-import type * as payments from "./generated/payments";
-import type * as subscriptions from "./generated/subscriptions";
-import type * as webhooks from "./generated/webhooks";
+import type * as products from "./generated/catalog-products.js";
+import type * as orders from "./generated/orders.js";
+import type * as payments from "./generated/payments.js";
+import type * as subscriptions from "./generated/subscriptions.js";
+import type * as webhooks from "./generated/webhooks.js";
 
 /**
  * api paths - using path definitions from generated types

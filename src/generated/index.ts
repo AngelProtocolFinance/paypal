@@ -4,8 +4,8 @@
  * https://github.com/paypal/paypal-rest-api-specifications
  */
 
-export * as subscriptions from './subscriptions';
-export * as catalog_products from './catalog-products';
-export * as orders from './orders';
-export * as webhooks from './webhooks';
-export * as payments from './payments';
+export * as subscriptions from './subscriptions.js';
+export * as catalog_products from './catalog-products.js';
+export * as orders from './orders.js';
+export * as webhooks from './webhooks.js';
+export * as payments from './payments.js';

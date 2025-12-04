@@ -66,7 +66,7 @@ async function createIndexFile(modules: string[]): Promise<void> {
 	const exports = modules
 		.map(
 			(moduleName) =>
-				`export * as ${moduleName.replace(/-/g, "_")} from './${moduleName}';`,
+				`export * as ${moduleName.replace(/-/g, "_")} from './${moduleName}.js';`,
 		)
 		.join("\n");
 

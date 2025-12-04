@@ -14,7 +14,7 @@ import {
 	type IAccessTokenRes,
 	type ISdkConfig,
 	oauth_token_path,
-} from "./interfaces";
+} from "./interfaces.js";
 
 export class PayPalSDK {
 	private config: ISdkConfig;

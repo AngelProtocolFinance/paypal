@@ -8,9 +8,9 @@ export type {
 	Order,
 	PurchaseUnitsRequest,
 	WebhookEvent,
-} from "./interfaces";
+} from "./interfaces.js";
 
-export { create_order_path, oauth_token_path } from "./interfaces";
+export { create_order_path, oauth_token_path } from "./interfaces.js";
 
 // Re-export the SDK class
-export { PayPalSDK } from "./sdk";
+export { PayPalSDK } from "./sdk.js";
