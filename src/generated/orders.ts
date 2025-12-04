@@ -2348,8 +2348,7 @@ export type components = {
         level_2_card_processing_data: {
             /** @description Use this field to pass a purchase identification value of up to 127 ASCII characters. The length of this field will be adjusted to meet network specifications (25chars for Visa and Mastercard, 17chars for Amex), and the original invoice ID will still be displayed in your existing reports. */
             invoice_id?: string;
-            /**
-             * @description Use this field to break down the amount of tax included in the total purchase amount. The value provided here will not add to the total purchase amount. The value can't be negative, and in most cases, it must be greater than zero in order to qualify for lower interchange rates.
+            /** @description Use this field to break down the amount of tax included in the total purchase amount. The value provided here will not add to the total purchase amount. The value can't be negative, and in most cases, it must be greater than zero in order to qualify for lower interchange rates.
              *      Value, by country, is:
              *
              *         UK. A county.
@@ -2357,7 +2356,7 @@ export type components = {
              *         Canada. A province.
              *         Japan. A prefecture.
              *         Switzerland. A kanton.
-             */
+             *      */
             tax_total?: components["schemas"]["money"];
         };
         /**

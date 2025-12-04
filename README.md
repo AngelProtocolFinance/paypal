@@ -14,7 +14,7 @@ TypeScript type definitions automatically generated from [PayPal's official Open
 ```bash
 npm install @better-giving/paypal
 # or
-bun add @better-giving/paypal
+pnpm add @better-giving/paypal
 ```
 
 ## Available Modules
@@ -115,7 +115,8 @@ async function create_order(order_data: CreateOrderRequest, access_token: string
 
 ### Prerequisites
 
-- Bun 1.0+
+- Node.js 20+
+- pnpm (via corepack)
 
 ### Building from Source
 
@@ -124,21 +125,23 @@ async function create_order(order_data: CreateOrderRequest, access_token: string
 git clone <your-repo-url>
 cd paypal-typescript-types
 
+# Enable corepack
+corepack enable
+
 # Install dependencies
-bun install
+pnpm install
 
 # Download PayPal OpenAPI specs and generate types
-bun run build
+pnpm build
 ```
 
 ### Scripts
 
-- `bun run download-specs` - Download OpenAPI specifications from PayPal's repository
-- `bun run generate` - Generate TypeScript types from downloaded specs
-- `bun run build` - Full build process (download specs + generate types + compile with bunup)
-- `bun run clean` - Remove generated files and build artifacts
+- `pnpm build` - Full build process (download specs + generate types + compile)
+- `pnpm clean` - Remove generated files and build artifacts
+- `pnpm format` - Format code with Biome
 
-This project uses [bunup](https://bunup.dev/) for fast TypeScript compilation and declaration file generation.
+This project uses the TypeScript compiler (tsc) for compiling source code and generating type declarations.
 
 ## Publishing
 
@@ -160,7 +163,7 @@ npm publish --access public
 To update the types when PayPal releases new API specifications:
 
 ```bash
-bun run build
+pnpm build
 npm version patch
 npm publish
 ```
