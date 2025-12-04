@@ -12,15 +12,15 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Required to create releases and push tags
-      pull-requests: write # Required to create PRs
-      id-token: write # Required for npm provenance
+      contents: write
+      pull-requests: write
+      id-token: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetch all history for changelog generation
+          fetch-depth: 0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -30,8 +30,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm for OIDC support
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: bun install
@@ -43,7 +46,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: bunx changeset publish
+          publish: bun run release
           version: bunx changeset version
           commit: 'chore: version packages'
           title: 'chore: version packages'
