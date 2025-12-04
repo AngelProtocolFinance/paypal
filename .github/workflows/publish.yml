@@ -1,26 +1,26 @@
-name: Publish to npm
+name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
-    inputs:
-      version:
-        description: 'Version to publish (leave empty to use package.json version)'
-        required: false
-        type: string
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  publish:
+  release:
+    name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      id-token: write # Required for npm provenance and trusted publishing
+      contents: write # Required to create releases and push tags
+      pull-requests: write # Required to create PRs
+      id-token: write # Required for npm provenance
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for changelog generation
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -33,14 +33,19 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Ensure npm CLI supports trusted publishing
-        run: npm install -g npm@latest
-
       - name: Install dependencies
         run: bun install
 
       - name: Build package
         run: bun run build
 
-      - name: Publish to npm with trusted publishing
-        run: npm publish --access public
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: bunx changeset publish
+          version: bunx changeset version
+          commit: 'chore: version packages'
+          title: 'chore: version packages'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
