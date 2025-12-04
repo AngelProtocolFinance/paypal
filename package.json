@@ -1,6 +1,6 @@
 {
 	"name": "@better-giving/paypal",
-	"version": "1.0.9",
+	"version": "1.0.10",
 	"description": "TypeScript type definitions generated from PayPal OpenAPI specifications",
 	"type": "module",
 	"exports": {
@@ -29,12 +29,12 @@
 	"author": "",
 	"license": "MIT",
 	"devDependencies": {
-		"@biomejs/biome": "^2.3.5",
-		"@types/node": "^24.10.1",
-		"bunup": "^0.15.14",
-		"dotenv-cli": "^11.0.0",
-		"openapi-typescript": "^7.4.4",
-		"typescript": "^5.7.2"
+		"@biomejs/biome": "2.3.5",
+		"@types/node": "24.10.1",
+		"bunup": "0.15.14",
+		"dotenv-cli": "11.0.0",
+		"openapi-typescript": "7.4.4",
+		"typescript": "5.7.2"
 	},
 	"files": [
 		"dist",
