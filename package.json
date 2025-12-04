@@ -12,7 +12,7 @@
 	},
 	"scripts": {
 		"build": "pnpm clean && tsx scripts/download-specs.ts && tsx scripts/generate-types.ts && tsc",
-		"release": "pnpm build && changeset publish",
+		"release": "changeset publish",
 		"clean": "rm -rf dist specs src/generated",
 		"format": "biome check --write --unsafe",
 		"changeset": "changeset",
