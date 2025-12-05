@@ -18,6 +18,7 @@ const GENERATED_DIR = join(__dirname, "..", "src", "generated");
 const MODULE_NAMES: Record<string, string> = {
 	"checkout_orders_v2.json": "orders",
 	"payments_payment_v2.json": "payments",
+	"payments_v1.json": "payments-v1",
 	"billing_subscriptions_v1.json": "subscriptions",
 	"invoicing_v2.json": "invoices",
 	"payments_payouts_batch_v1.json": "payouts",

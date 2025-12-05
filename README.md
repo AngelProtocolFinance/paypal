@@ -25,6 +25,7 @@ This package provides TypeScript types for the following PayPal APIs:
 |--------|-------------|-----|
 | **Orders** | `@better-giving/paypal/generated` (`orders`) | Checkout Orders API v2 |
 | **Payments** | `@better-giving/paypal/generated` (`payments`) | Payments API v2 |
+| **Payments v1** | `@better-giving/paypal/generated` (`payments_v1`) | Payments API v1 (Legacy) |
 | **Subscriptions** | `@better-giving/paypal/generated` (`subscriptions`) | Billing Subscriptions API v1 |
 | **Invoices** | `@better-giving/paypal/generated` (`invoices`) | Invoicing API v2 |
 | **Payouts** | `@better-giving/paypal/generated` (`payouts`) | Payouts Batch API v1 |

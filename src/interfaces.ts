@@ -1,6 +1,7 @@
 import type * as products from "./generated/catalog-products.js";
 import type * as orders from "./generated/orders.js";
 import type * as payments from "./generated/payments.js";
+import type * as payments_v1 from "./generated/payments-v1.js";
 import type * as subscriptions from "./generated/subscriptions.js";
 import type * as webhooks from "./generated/webhooks.js";
 
@@ -41,6 +42,7 @@ export type PurchaseUnitsRequest =
 export type Order = orders.components["schemas"]["order"];
 export type Capture = payments.components["schemas"]["capture-2"];
 export type Subs = subscriptions.components["schemas"]["subscription"];
+export type Sale = payments_v1.components["schemas"]["sale"];
 export type WebhookEvent = webhooks.components["schemas"]["event"];
 
 /**

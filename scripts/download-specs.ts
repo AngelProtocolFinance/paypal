@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readdir, readFile, copyFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const SPECS_DIR = join(__dirname, "..", "specs");
+const CUSTOM_SPECS_DIR = join(__dirname, "..", "custom_specs");
 const BASE_URL =
 	"https://raw.githubusercontent.com/paypal/paypal-rest-api-specifications/main/openapi";
 
@@ -51,6 +52,38 @@ async function downloadSpec(filename: string): Promise<boolean> {
 	}
 }
 
+async function copyCustomSpecs(): Promise<number> {
+	console.log("\nCopying custom specifications...");
+
+	try {
+		// Check if custom_specs directory exists
+		const versions = await readdir(CUSTOM_SPECS_DIR);
+		let copiedCount = 0;
+
+		for (const version of versions) {
+			const versionDir = join(CUSTOM_SPECS_DIR, version);
+			const files = await readdir(versionDir);
+
+			for (const file of files) {
+				if (file.endsWith('.json')) {
+					const sourcePath = join(versionDir, file);
+					const destPath = join(SPECS_DIR, file);
+
+					await copyFile(sourcePath, destPath);
+					console.log(`✓ Copied custom spec: ${file}`);
+					copiedCount++;
+				}
+			}
+		}
+
+		return copiedCount;
+	} catch (error) {
+		// Custom specs directory doesn't exist or is empty
+		console.log("No custom specifications found (this is optional)");
+		return 0;
+	}
+}
+
 async function main(): Promise<void> {
 	console.log("Creating specs directory...");
 	await mkdir(SPECS_DIR, { recursive: true });
@@ -64,6 +97,13 @@ async function main(): Promise<void> {
 
 	console.log(
 		`\n✓ Downloaded ${successCount}/${SPEC_FILES.length} specifications`,
+	);
+
+	// Copy custom specifications
+	const customCount = await copyCustomSpecs();
+
+	console.log(
+		`\n✓ Total specifications ready: ${successCount + customCount} (${successCount} downloaded + ${customCount} custom)`,
 	);
 
 	if (successCount < SPEC_FILES.length) {
