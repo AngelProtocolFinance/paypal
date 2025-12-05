@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { mkdir, writeFile, readdir, copyFile, stat } from "node:fs/promises";
+import { copyFile, mkdir, readdir, stat, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -69,7 +69,7 @@ async function copyCustomSpecs(): Promise<number> {
 				const files = await readdir(entryPath);
 
 				for (const file of files) {
-					if (file.endsWith('.json')) {
+					if (file.endsWith(".json")) {
 						const sourcePath = join(entryPath, file);
 						const destPath = join(SPECS_DIR, file);
 
@@ -82,7 +82,7 @@ async function copyCustomSpecs(): Promise<number> {
 		}
 
 		return copiedCount;
-	} catch (error) {
+	} catch (_error) {
 		// Custom specs directory doesn't exist or is empty
 		console.log("No custom specifications found (this is optional)");
 		return 0;

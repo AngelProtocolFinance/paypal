@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.3.1
+
+### Patch Changes
+
+- Add payments v1 API types (Sale, Subs) and update custom spec
+
 ## 1.3.0
 
 ### Minor Changes

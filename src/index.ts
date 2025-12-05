@@ -9,6 +9,8 @@ export type {
 	ISdkConfig,
 	Order,
 	PurchaseUnitsRequest,
+	Sale,
+	Subs,
 	WebhookEvent,
 } from "./interfaces.js";
 
