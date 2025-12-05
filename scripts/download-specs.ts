@@ -1,6 +1,6 @@
 #!/usr/bin/env tsx
 
-import { mkdir, writeFile, readdir, readFile, copyFile } from "node:fs/promises";
+import { mkdir, writeFile, readdir, copyFile, stat } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -57,21 +57,26 @@ async function copyCustomSpecs(): Promise<number> {
 
 	try {
 		// Check if custom_specs directory exists
-		const versions = await readdir(CUSTOM_SPECS_DIR);
+		const entries = await readdir(CUSTOM_SPECS_DIR);
 		let copiedCount = 0;
 
-		for (const version of versions) {
-			const versionDir = join(CUSTOM_SPECS_DIR, version);
-			const files = await readdir(versionDir);
+		for (const entry of entries) {
+			const entryPath = join(CUSTOM_SPECS_DIR, entry);
+			const entryStat = await stat(entryPath);
 
-			for (const file of files) {
-				if (file.endsWith('.json')) {
-					const sourcePath = join(versionDir, file);
-					const destPath = join(SPECS_DIR, file);
+			// Only process directories (version folders like v1, v2, etc.)
+			if (entryStat.isDirectory()) {
+				const files = await readdir(entryPath);
 
-					await copyFile(sourcePath, destPath);
-					console.log(`✓ Copied custom spec: ${file}`);
-					copiedCount++;
+				for (const file of files) {
+					if (file.endsWith('.json')) {
+						const sourcePath = join(entryPath, file);
+						const destPath = join(SPECS_DIR, file);
+
+						await copyFile(sourcePath, destPath);
+						console.log(`✓ Copied custom spec: ${file}`);
+						copiedCount++;
+					}
 				}
 			}
 		}
