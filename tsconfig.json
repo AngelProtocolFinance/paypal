@@ -1,17 +1,33 @@
 {
 	"compilerOptions": {
-		"target": "ES2020",
-		"module": "NodeNext",
-		"lib": ["ES2020"],
-		"moduleResolution": "NodeNext",
-		"declaration": true,
-		"declarationMap": true,
-		"outDir": "./dist",
-		"rootDir": "./src",
+		/* Base Options */
 		"esModuleInterop": true,
 		"skipLibCheck": true,
-		"forceConsistentCasingInFileNames": true,
+		"target": "es2022",
+		"allowJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+
+		/* Strictness */
 		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"forceConsistentCasingInFileNames": true,
+
+		/* Transpiling with TypeScript */
+		"module": "NodeNext",
+		"outDir": "dist",
+		"rootDir": "./src",
+		"sourceMap": true,
+
+		/* Building for a Library */
+		"declaration": true,
+		"declarationMap": true,
+
+		/* Environment */
+		"lib": ["es2022"],
 		"types": ["node"]
 	},
 	"include": ["src/**/*"],

@@ -23,6 +23,11 @@ export const create_plan_path: Extract<
 	"/v1/billing/plans"
 > = "/v1/billing/plans";
 
+export const get_plans_path: Extract<
+	keyof subscriptions.paths,
+	"/v1/billing/plans"
+> = "/v1/billing/plans";
+
 export const create_subscription_path: Extract<
 	keyof subscriptions.paths,
 	"/v1/billing/subscriptions"
@@ -75,6 +80,19 @@ export type CreatePlanRequest = NonNullable<
  */
 export type CreatePlanResponse =
 	subscriptions.paths["/v1/billing/plans"]["post"]["responses"]["201"]["content"]["application/json"];
+
+/**
+ * type for get plans query parameters
+ */
+export type GetPlansParams = NonNullable<
+	subscriptions.paths["/v1/billing/plans"]["get"]["parameters"]["query"]
+>;
+
+/**
+ * type for get plans response
+ */
+export type GetPlansResponse =
+	subscriptions.paths["/v1/billing/plans"]["get"]["responses"]["200"]["content"]["application/json"];
 
 /**
  * type for create subscription request body

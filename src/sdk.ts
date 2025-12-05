@@ -11,6 +11,9 @@ import {
 	create_plan_path,
 	create_product_path,
 	create_subscription_path,
+	type GetPlansParams,
+	type GetPlansResponse,
+	get_plans_path,
 	type IAccessTokenRes,
 	type ISdkConfig,
 	oauth_token_path,
@@ -149,6 +152,37 @@ export class PayPalSDK {
 		}
 
 		return (await response.json()) as CreatePlanResponse;
+	}
+
+	/**
+	 * list billing plans
+	 */
+	async get_plans(params?: GetPlansParams): Promise<GetPlansResponse> {
+		const token = await this.get_access_token();
+
+		const url = new URL(`${this.config.api_url}${get_plans_path}`);
+		if (params) {
+			for (const [key, value] of Object.entries(params)) {
+				if (value !== undefined) {
+					url.searchParams.append(key, String(value));
+				}
+			}
+		}
+
+		const response = await globalThis.fetch(url.toString(), {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(`Failed to get plans: ${response.status} ${error}`);
+		}
+
+		return (await response.json()) as GetPlansResponse;
 	}
 
 	/**
