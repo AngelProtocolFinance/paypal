@@ -29,6 +29,11 @@ export const get_plans_path: Extract<
 	"/v1/billing/plans"
 > = "/v1/billing/plans";
 
+export const get_plan_path = "/v1/billing/plans/{id}" as const;
+
+export const deactivate_plan_path =
+	"/v1/billing/plans/{id}/deactivate" as const;
+
 export const create_subscription_path: Extract<
 	keyof subscriptions.paths,
 	"/v1/billing/subscriptions"
@@ -95,6 +100,18 @@ export type GetPlansParams = NonNullable<
  */
 export type GetPlansResponse =
 	subscriptions.paths["/v1/billing/plans"]["get"]["responses"]["200"]["content"]["application/json"];
+
+/**
+ * type for get plan response (single plan)
+ */
+export type GetPlanResponse =
+	subscriptions.paths["/v1/billing/plans/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
+
+/**
+ * type for deactivate plan response
+ */
+export type DeactivatePlanResponse =
+	subscriptions.paths["/v1/billing/plans/{id}/deactivate"]["post"]["responses"]["204"];
 
 /**
  * type for create subscription request body

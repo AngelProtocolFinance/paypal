@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.3.2
+
+### Patch Changes
+
+- Add get_plan and deactivate_plan functions to SDK
+
 ## 1.3.1
 
 ### Patch Changes

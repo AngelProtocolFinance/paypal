@@ -11,8 +11,11 @@ import {
 	create_plan_path,
 	create_product_path,
 	create_subscription_path,
+	deactivate_plan_path,
+	type GetPlanResponse,
 	type GetPlansParams,
 	type GetPlansResponse,
+	get_plan_path,
 	get_plans_path,
 	type IAccessTokenRes,
 	type ISdkConfig,
@@ -183,6 +186,52 @@ export class PayPalSDK {
 		}
 
 		return (await response.json()) as GetPlansResponse;
+	}
+
+	/**
+	 * get a single billing plan by ID
+	 */
+	async get_plan(plan_id: string): Promise<GetPlanResponse> {
+		const token = await this.get_access_token();
+
+		const path = get_plan_path.replace("{id}", plan_id);
+		const response = await globalThis.fetch(`${this.config.api_url}${path}`, {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(`Failed to get plan: ${response.status} ${error}`);
+		}
+
+		return (await response.json()) as GetPlanResponse;
+	}
+
+	/**
+	 * deactivate a billing plan
+	 */
+	async deactivate_plan(plan_id: string): Promise<void> {
+		const token = await this.get_access_token();
+
+		const path = deactivate_plan_path.replace("{id}", plan_id);
+		const response = await globalThis.fetch(`${this.config.api_url}${path}`, {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(`Failed to deactivate plan: ${response.status} ${error}`);
+		}
+
+		// 204 No Content - no response body
 	}
 
 	/**
