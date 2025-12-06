@@ -15,8 +15,10 @@ import {
 	type GetPlanResponse,
 	type GetPlansParams,
 	type GetPlansResponse,
+	type GetSubscriptionResponse,
 	get_plan_path,
 	get_plans_path,
+	get_subscription_path,
 	type IAccessTokenRes,
 	type ISdkConfig,
 	oauth_token_path,
@@ -262,5 +264,35 @@ export class PayPalSDK {
 		}
 
 		return (await response.json()) as CreateSubscriptionResponse;
+	}
+
+	/**
+	 * get a subscription by ID
+	 */
+	async get_subscription(
+		subscription_id: string,
+	): Promise<GetSubscriptionResponse> {
+		const token = await this.get_access_token();
+
+		const path = get_subscription_path.replace("{id}", subscription_id);
+		const response = await globalThis.fetch(
+			`${this.config.api_url}${path}`,
+			{
+				method: "GET",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+			},
+		);
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(
+				`Failed to get subscription: ${response.status} ${error}`,
+			);
+		}
+
+		return (await response.json()) as GetSubscriptionResponse;
 	}
 }

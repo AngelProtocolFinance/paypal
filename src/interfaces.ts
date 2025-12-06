@@ -39,6 +39,9 @@ export const create_subscription_path: Extract<
 	"/v1/billing/subscriptions"
 > = "/v1/billing/subscriptions";
 
+export const get_subscription_path =
+	"/v1/billing/subscriptions/{id}" as const;
+
 export const oauth_token_path = "/v1/oauth2/token" as const;
 
 export type PurchaseUnitsRequest =
@@ -125,6 +128,12 @@ export type CreateSubscriptionRequest = NonNullable<
  */
 export type CreateSubscriptionResponse =
 	subscriptions.paths["/v1/billing/subscriptions"]["post"]["responses"]["201"]["content"]["application/json"];
+
+/**
+ * type for get subscription response
+ */
+export type GetSubscriptionResponse =
+	subscriptions.paths["/v1/billing/subscriptions/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
 
 /**
  * paypal sdk configuration

@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.3.3
+
+### Patch Changes
+
+- Add get_subscription function to SDK
+
 ## 1.3.2
 
 ### Patch Changes

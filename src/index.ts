@@ -5,6 +5,7 @@ export type {
 	GetPlanResponse,
 	GetPlansParams,
 	GetPlansResponse,
+	GetSubscriptionResponse,
 	IAccessTokenRes,
 	ISdkConfig,
 	Order,
