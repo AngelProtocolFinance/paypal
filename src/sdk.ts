@@ -1,4 +1,6 @@
 import {
+	type CancelSubscriptionRequest,
+	cancel_subscription_path,
 	type CreateOrderRequest,
 	type CreateOrderResponse,
 	type CreatePlanRequest,
@@ -294,5 +296,37 @@ export class PayPalSDK {
 		}
 
 		return (await response.json()) as GetSubscriptionResponse;
+	}
+
+	/**
+	 * cancel a subscription
+	 */
+	async cancel_subscription(
+		subscription_id: string,
+		cancel_data: CancelSubscriptionRequest,
+	): Promise<void> {
+		const token = await this.get_access_token();
+
+		const path = cancel_subscription_path.replace("{id}", subscription_id);
+		const response = await globalThis.fetch(
+			`${this.config.api_url}${path}`,
+			{
+				method: "POST",
+				headers: {
+					Authorization: `Bearer ${token}`,
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(cancel_data),
+			},
+		);
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(
+				`Failed to cancel subscription: ${response.status} ${error}`,
+			);
+		}
+
+		// 204 No Content - no response body
 	}
 }

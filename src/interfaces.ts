@@ -42,6 +42,9 @@ export const create_subscription_path: Extract<
 export const get_subscription_path =
 	"/v1/billing/subscriptions/{id}" as const;
 
+export const cancel_subscription_path =
+	"/v1/billing/subscriptions/{id}/cancel" as const;
+
 export const oauth_token_path = "/v1/oauth2/token" as const;
 
 export type PurchaseUnitsRequest =
@@ -134,6 +137,13 @@ export type CreateSubscriptionResponse =
  */
 export type GetSubscriptionResponse =
 	subscriptions.paths["/v1/billing/subscriptions/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
+
+/**
+ * type for cancel subscription request body
+ */
+export type CancelSubscriptionRequest = NonNullable<
+	subscriptions.paths["/v1/billing/subscriptions/{id}/cancel"]["post"]["requestBody"]
+>["content"]["application/json"];
 
 /**
  * paypal sdk configuration

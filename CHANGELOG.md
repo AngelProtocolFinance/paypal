@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.3.4
+
+### Patch Changes
+
+- Add cancel_subscription method to SDK
+
 ## 1.3.3
 
 ### Patch Changes

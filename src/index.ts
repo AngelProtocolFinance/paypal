@@ -1,4 +1,5 @@
 export type {
+	CancelSubscriptionRequest,
 	Capture,
 	CreateOrderRequest,
 	CreateOrderResponse,
