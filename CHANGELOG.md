@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.4.0
+
+### Minor Changes
+
+- add `get_order` method to fetch order by ID
+
 ## 1.3.4
 
 ### Patch Changes

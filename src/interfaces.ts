@@ -29,6 +29,8 @@ export const get_plans_path: Extract<
 	"/v1/billing/plans"
 > = "/v1/billing/plans";
 
+export const get_order_path = "/v2/checkout/orders/{id}" as const;
+
 export const get_plan_path = "/v1/billing/plans/{id}" as const;
 
 export const deactivate_plan_path =
@@ -67,6 +69,12 @@ export type CreateOrderRequest =
  */
 export type CreateOrderResponse =
 	orders.paths["/v2/checkout/orders"]["post"]["responses"]["201"]["content"]["application/json"];
+
+/**
+ * type for get order response
+ */
+export type GetOrderResponse =
+	orders.paths["/v2/checkout/orders/{id}"]["get"]["responses"]["200"]["content"]["application/json"];
 
 /**
  * type for create product request body

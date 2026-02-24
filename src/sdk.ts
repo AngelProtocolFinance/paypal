@@ -3,6 +3,7 @@ import {
 	cancel_subscription_path,
 	type CreateOrderRequest,
 	type CreateOrderResponse,
+	type GetOrderResponse,
 	type CreatePlanRequest,
 	type CreatePlanResponse,
 	type CreateProductRequest,
@@ -10,6 +11,7 @@ import {
 	type CreateSubscriptionRequest,
 	type CreateSubscriptionResponse,
 	create_order_path,
+	get_order_path,
 	create_plan_path,
 	create_product_path,
 	create_subscription_path,
@@ -105,6 +107,29 @@ export class PayPalSDK {
 		}
 
 		return (await response.json()) as CreateOrderResponse;
+	}
+
+	/**
+	 * get an order by ID
+	 */
+	async get_order(order_id: string): Promise<GetOrderResponse> {
+		const token = await this.get_access_token();
+
+		const path = get_order_path.replace("{id}", order_id);
+		const response = await globalThis.fetch(`${this.config.api_url}${path}`, {
+			method: "GET",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+		});
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(`Failed to get order: ${response.status} ${error}`);
+		}
+
+		return (await response.json()) as GetOrderResponse;
 	}
 
 	/**

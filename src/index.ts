@@ -3,6 +3,7 @@ export type {
 	Capture,
 	CreateOrderRequest,
 	CreateOrderResponse,
+	GetOrderResponse,
 	GetPlanResponse,
 	GetPlansParams,
 	GetPlansResponse,
