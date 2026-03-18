@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.5.0
+
+### Minor Changes
+
+- add capture_order method
+
 ## 1.4.0
 
 ### Minor Changes
