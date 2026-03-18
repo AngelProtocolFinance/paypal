@@ -146,6 +146,7 @@ export class PayPalSDK {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
+        Prefer: "return=representation",
       },
     });
 

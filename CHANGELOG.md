@@ -1,5 +1,11 @@
 # @better-giving/paypal
 
+## 1.5.1
+
+### Patch Changes
+
+- fix capture_order returning minimal response by adding Prefer: return=representation header
+
 ## 1.5.0
 
 ### Minor Changes
