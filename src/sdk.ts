@@ -1,5 +1,6 @@
 import {
   type CancelSubscriptionRequest,
+  type CaptureOrderResponse,
   type CreateOrderRequest,
   type CreateOrderResponse,
   type CreatePlanRequest,
@@ -16,6 +17,7 @@ import {
   type IAccessTokenRes,
   type ISdkConfig,
   cancel_subscription_path,
+  capture_order_path,
   create_order_path,
   create_plan_path,
   create_product_path,
